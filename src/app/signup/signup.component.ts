@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,12 +6,14 @@ import { NgForm } from '@angular/forms';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   @ViewChild('signUpForm', { static: false }) signUpForm!: NgForm;
-  constructor() {}
-
-  ngOnInit(): void {}
+  submitted: boolean;
+  constructor() {
+    this.submitted = false;
+  }
   onSubmit(signupForm: NgForm) {
-    console.log(signupForm.value);
+    this.submitted = true;
+    console.log(signupForm.valid, signupForm);
   }
 }

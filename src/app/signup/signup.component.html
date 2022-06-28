@@ -13,11 +13,13 @@
                   type="text"
                   class="form-control"
                   name="firstname"
-                  placeholder="First Name"
+                  placeholder="First Name*"
                   pattern="^[a-zA-Z]+$"
                   required
                   ngModel
                   #firstname="ngModel"
+                  minlength="3"
+                  maxlength="25"
                 />
                 <div
                   *ngIf="
@@ -34,11 +36,12 @@
                   type="text"
                   class="form-control"
                   name="lastname"
-                  placeholder="Last Name"
+                  placeholder="Last Name*"
                   pattern="^[a-zA-Z]+$"
                   required
                   ngModel
                   #lastname="ngModel"
+                  maxlength="25"
                 />
                 <div
                   *ngIf="
@@ -56,7 +59,7 @@
               type="email"
               class="form-control"
               name="email"
-              placeholder="Email"
+              placeholder="Email*"
               pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               required
               ngModel
@@ -74,7 +77,7 @@
               type="password"
               class="form-control"
               name="password"
-              placeholder="Password"
+              placeholder="Password*"
               required
               ngModel
               #password="ngModel"
@@ -100,11 +103,39 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-check-label"
-              ><input type="checkbox" required /> I accept the
-              <a href="#">Terms of Use</a> &amp;
-              <a href="#">Privacy Policy</a></label
+            <input
+              type="password"
+              class="form-control"
+              name="confirmPassword"
+              placeholder="confirmPassword*"
+              required
+              ngModel
+              #confirmPassword="ngModel"
+              pattern="^[a-zA-Z]+$"
+              minlength="8"
+              maxlength="25"
+            />
+            <div
+              *ngIf="
+                !confirmPassword?.valid &&
+                (confirmPassword?.dirty || confirmPassword?.touched)
+              "
+              class="text-danger h6"
             >
+              Please enter Valid password
+            </div>
+            <div
+              class="text-danger h6"
+              *ngIf="
+                confirmPassword?.valid &&
+                confirmPassword.value !== password.value
+              "
+            >
+              confirm password Should be as same as the password
+            </div>
+          </div>
+          <div *ngIf="submitted && !signUpForm?.valid" class="text-danger h6">
+            Please enter all required fields
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-lg">
