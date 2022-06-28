@@ -77,17 +77,27 @@
               placeholder="Password"
               required
               ngModel
+              #password="ngModel"
+              pattern="^[a-zA-Z]+$"
+              minlength="8"
+              maxlength="25"
             />
-          </div>
-          <div class="form-group">
-            <input
-              type="password"
-              class="form-control"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              required
-              ngModel
-            />
+            <div
+              *ngIf="!password?.valid && (password?.dirty || password?.touched)"
+              class="text-danger h6"
+            >
+              Please enter Valid password
+            </div>
+            <div
+              class="text-danger h6"
+              *ngIf="
+                password?.valid &&
+                password.value.indexOf(firstname.value) >= 0 &&
+                password.value.indexOf(lastname.value) >= 0
+              "
+            >
+              Password Should not contain user's first or last name.
+            </div>
           </div>
           <div class="form-group">
             <label class="form-check-label"
