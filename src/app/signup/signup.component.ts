@@ -8,7 +8,7 @@ import { AppService } from '../app.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   @ViewChild('signUpForm', { static: false }) signUpForm!: NgForm;
   submitted: boolean;
   apiError: boolean;
@@ -16,7 +16,6 @@ export class SignupComponent implements OnInit {
     this.submitted = false;
     this.apiError = false;
   }
-  ngOnInit(): void {}
   onSubmit(signupForm: NgForm) {
     this.submitted = true;
     this.apiError = false;
