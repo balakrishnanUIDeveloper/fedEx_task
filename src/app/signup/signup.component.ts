@@ -19,7 +19,6 @@ export class SignupComponent {
   onSubmit(signupForm: NgForm) {
     this.submitted = true;
     this.apiError = false;
-    console.log(signupForm.valid, signupForm);
     if (signupForm.value) {
       let formData = signupForm.value;
       let requestObj = {

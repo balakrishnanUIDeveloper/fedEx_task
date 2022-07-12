@@ -33,15 +33,27 @@ describe('SignupComponent', () => {
   it('can load instance', () => {
     expect(component).toBeTruthy();
   });
-  it('Set Input type text value', async () => {
+  it('Set firstname text value', async () => {
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       const firstName = fixture.debugElement.query(By.css('#firstName'));
       firstName.nativeElement.value = 'john';
       firstName.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
-      console.log('sendInput : ', firstName.nativeElement.value);
       expect(firstName.nativeElement.value).toContain('john');
+    });
+  });
+  it('check password validation', async () => {
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      const password = fixture.debugElement.query(By.css('#password'));
+      password.nativeElement.dispatchEvent(new Event('focus'));
+      password.nativeElement.dispatchEvent(new Event('blue'));
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        const error = fixture.debugElement.query(By.css('.h6'));
+        expect(error.nativeElement.innerHTML).toBeDefined();
+      });
     });
   });
   describe('onSubmit', () => {
